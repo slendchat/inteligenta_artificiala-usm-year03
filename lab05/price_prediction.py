@@ -1,4 +1,5 @@
 from enum import Enum
+from __future__ import annotations
 
 def fuzzy_memebership(value, low, mid, high) -> tendention:
   ...
