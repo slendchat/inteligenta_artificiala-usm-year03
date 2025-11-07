@@ -1,8 +1,0 @@
-pyproject.toml
-readme.md
-boids/boids.egg-info/PKG-INFO
-boids/boids.egg-info/SOURCES.txt
-boids/boids.egg-info/dependency_links.txt
-boids/boids.egg-info/entry_points.txt
-boids/boids.egg-info/requires.txt
-boids/boids.egg-info/top_level.txt
