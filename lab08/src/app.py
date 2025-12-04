@@ -173,7 +173,7 @@ class PlannerApp(tk.Tk):
             )
             self.animation_states = result.path
             self.animation_index = 0
-            self.after(200, self._animate_step)
+            self.after(100, self._animate_step)
         else:
             self.metrics_text.set(f"{result.name}: solution not found.")
 
@@ -187,7 +187,7 @@ class PlannerApp(tk.Tk):
         self._draw_agent(current_state)
         self.animation_index += 1
         if self.animation_index < len(self.animation_states):
-            self.after(350, self._animate_step)
+            self.after(100, self._animate_step)
 
     def populate_table(self) -> None:
         for row in self.table.get_children():
