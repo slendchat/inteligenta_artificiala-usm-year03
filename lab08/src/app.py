@@ -3,6 +3,8 @@ from __future__ import annotations
 import tkinter as tk
 from tkinter import ttk
 
+from planner import experiments, heuristics, search, state
+
 CELL_SIZE = 30
 PADDING = 10
 
