@@ -48,6 +48,7 @@ def _uniform_cost_search(
     successor_fn,
     heuristic: heuristics.Heuristic,
     label: str,
+    reverse_result: bool = False,
 ) -> SearchResult:
     t0 = time.perf_counter()
     parents: Dict[state.State, Optional[Tuple[state.State, str]]] = {}
@@ -70,6 +71,9 @@ def _uniform_cost_search(
         visited += 1
         if goal_test(current):
             path, actions = _reconstruct(parents, current)
+            if reverse_result:
+                path = list(reversed(path))
+                actions = list(reversed(actions))
             runtime = time.perf_counter() - t0
             return SearchResult(
                 name=label,
@@ -120,6 +124,7 @@ def backward_search(heuristic: heuristics.Heuristic = heuristics.zero) -> Search
         successor_fn=state.predecessor_states,
         heuristic=heuristic,
         label="Backward",
+        reverse_result=True,
     )
 
 
@@ -137,11 +142,9 @@ def bidirectional_search() -> SearchResult:
     def _merge(meeting: state.State) -> Tuple[List[state.State], List[str]]:
         path_forward, actions_forward = _reconstruct(front_parents, meeting)
         path_backward, actions_backward = _reconstruct(back_parents, meeting)
-        # remove duplicate meeting node from backward part
-        path_backward = path_backward[1:]
-        actions_backward = actions_backward
-        full_path = path_forward + list(reversed(path_backward))
-        full_actions = actions_forward + [act for act in reversed(actions_backward)]
+        backward_tail = list(reversed(path_backward))[1:]
+        full_path = path_forward + backward_tail
+        full_actions = actions_forward + list(reversed(actions_backward))
         return full_path, full_actions
 
     while front_queue and back_queue:

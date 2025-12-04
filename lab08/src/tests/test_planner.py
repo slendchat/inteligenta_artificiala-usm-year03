@@ -13,7 +13,7 @@ class PlannerTests(unittest.TestCase):
         start = state.initial_state()
         result = search.backward_search(heuristics.start_distance)
         self.assertTrue(result.found)
-        self.assertEqual(result.path[-1], start)
+        self.assertEqual(result.path[0], start)
 
 
 if __name__ == "__main__":
