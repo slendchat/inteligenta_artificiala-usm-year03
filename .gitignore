@@ -1,3 +1,6 @@
 */venv/
 */boids/__pycache__
 */boids/boids.egg-info
+*__pycache__/
+implementation_plan
+*.pdf
