@@ -3,12 +3,33 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable, List, Optional, Tuple
 
-GRID_WIDTH = 5
-GRID_HEIGHT = 5
+GRID_WIDTH = 15
+GRID_HEIGHT = 15
 BASE = (0, 0)
-CRATES = [(4, 4), (2, 1)]
-OBSTACLES = {(1, 2), (3, 2)}
-START_POS = (0, 4)
+CRATES = [(12, 13), (7, 5), (3, 10)]
+OBSTACLES = {
+    (2, 2),
+    (3, 2),
+    (4, 2),
+    (5, 5),
+    (6, 5),
+    (8, 5),
+    (6, 9),
+    (7, 9),
+    (8, 9),
+    (9, 9),
+    (10, 9),
+    (11, 9),
+    (6, 10),
+    (6, 11),
+    (4, 11),
+    (5, 11),
+    (10, 3),
+    (11, 3),
+    (12, 3),
+    (9, 4),
+}
+START_POS = (0, 14)
 
 
 Position = Tuple[int, int]
