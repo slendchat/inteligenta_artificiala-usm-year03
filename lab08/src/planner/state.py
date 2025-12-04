@@ -118,21 +118,22 @@ def predecessor_states(state: State) -> Iterable[Transition]:
     # reverse transitions for backward reasoning
     transitions: List[Transition] = []
     # reverse drops -> pick up at base
-    for idx in range(len(CRATES)):
-        if state.delivered[idx]:
-            prev_delivered = list(state.delivered)
-            prev_delivered[idx] = False
-            prev_state = State(agent=state.agent, carrying=idx, delivered=tuple(prev_delivered))
-            transitions.append(
-                Transition(
-                    action=f"Drop crate {idx}",
-                    source=state,
-                    target=prev_state,
+    if state.agent == BASE and state.carrying is None:
+        for idx in range(len(CRATES)):
+            if state.delivered[idx]:
+                prev_delivered = list(state.delivered)
+                prev_delivered[idx] = False
+                prev_state = State(agent=state.agent, carrying=idx, delivered=tuple(prev_delivered))
+                transitions.append(
+                    Transition(
+                        action=f"Drop crate {idx}",
+                        source=state,
+                        target=prev_state,
+                    )
                 )
-            )
-    # reverse picks -> place crate at location
+    # reverse picks -> place crate at original location
     for idx, crate_pos in enumerate(CRATES):
-        if state.carrying == idx:
+        if state.carrying == idx and state.agent == crate_pos:
             prev_state = State(agent=crate_pos, carrying=None, delivered=state.delivered)
             transitions.append(
                 Transition(
